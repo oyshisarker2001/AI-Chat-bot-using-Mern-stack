@@ -4,10 +4,10 @@ import TypingAnim from "../components/typer/TypingAnim";
 import Footer from "../components/footer/Footer";
 
 const Home = () => {
-  const theme = useTheme();
-  const isBelowMd = useMediaQuery(theme.breakpoints.down("md"));
-  return (
-    <Box width={"100%"} height={"100%"}>
+const theme = useTheme();
+const isBelowMd = useMediaQuery(theme.breakpoints.down("md"));
+return (
+    <Box width={"100%"} height={"100%"} bgcolor="#f0f8ff"> 
       <Box
         sx={{
           display: "flex",
@@ -28,18 +28,22 @@ const Home = () => {
             flexDirection: { md: "row", xs: "column", sm: "column" },
             gap: 5,
             my: 10,
+            backgroundColor: "#e6f7ff", 
+            borderRadius: 3,
+            boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)", 
+            padding: 3,
           }}
         >
           <img
             src="robot.png"
             alt="robot"
-            style={{ width: "200px", margin: "auto" }}
+            style={{ width: "200px", margin: "auto", borderRadius: 10 }}
           />
           <img
             className="image-inverted rotate"
             src="openai.png"
             alt="openai"
-            style={{ width: "200px", margin: "auto" }}
+            style={{ width: "200px", margin: "auto", borderRadius: 10 }}
           />
         </Box>
         <Box sx={{ display: "flex", mx: "auto" }}>
@@ -51,10 +55,11 @@ const Home = () => {
               margin: "auto",
               width: isBelowMd ? "80%" : "60%",
               borderRadius: 20,
-              boxShadow: "-5px -5px 105px #64f3d5",
+              boxShadow: "-5px -5px 105px #64b5f6",
               marginTop: 20,
               marginBottom: 20,
               padding: 10,
+              border: "5px solid #4caf50", 
             }}
           />
         </Box>

@@ -73,6 +73,7 @@ return (
         height: "100%",
         mt: 3,
         gap: 3,
+        color:"black"
       }}
     >
       <Box
@@ -87,7 +88,7 @@ return (
             display: "flex",
             width: "100%",
             height: "60vh",
-            bgcolor: "rgb(17,29,39)",
+            bgcolor: "lightblue",
             borderRadius: 5,
             flexDirection: "column",
             mx: 3,
@@ -97,18 +98,18 @@ return (
             sx={{
               mx: "auto",
               my: 2,
-              bgcolor: "white",
-              color: "black",
+              bgcolor: "black",
+              color: "white",
               fontWeight: 700,
             }}
           >
             {auth?.user?.name[0]}
             {auth?.user?.name.split(" ")[1][0]}
           </Avatar>
-          <Typography sx={{ mx: "auto", fontFamily: "work sans" }}>
+          <Typography sx={{ mx: "auto", fontFamily: "work sans",color:"black" }}>
             You are talking to a ChatBOT
           </Typography>
-          <Typography sx={{ mx: "auto", fontFamily: "work sans", my: 4, p: 3 }}>
+          <Typography sx={{ mx: "auto", fontFamily: "work sans", my: 4, p: 3,color:"black" }}>
             You can ask some questions related to Knowledge, Business, Advices,
             Education, etc. But avoid sharing personal information
           </Typography> 
@@ -139,7 +140,7 @@ return (
     <Typography  
       sx={{
       fontSize: "40px",
-      color: "white",
+      color: "black",
       mb: 2,
       mx: "auto",
       fontWeight: "600",
@@ -169,7 +170,7 @@ return (
         width:"100%",
         padding:"20px",
         borderRadius:8,
-        backgroundColor:"rgb(17,27,39)",
+        backgroundColor:"lightblue",
         display:"flex",
         marginRight:"auto",
         }}
@@ -184,11 +185,11 @@ return (
        padding:"10px",
        border:"none",
        outline:"none",
-       color:"white",
+       color:"black",
        fontSize:"20px"
        }}
        />
-        <IconButton onClick={handleSubmit} sx={{ml:"auto",color:"white"}}>
+        <IconButton onClick={handleSubmit} sx={{ml:"auto",color:"black"}}>
          <IoMdSend/>
         </IconButton>
        </div>
