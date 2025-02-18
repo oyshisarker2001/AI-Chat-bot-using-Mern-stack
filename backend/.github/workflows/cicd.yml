@@ -10,23 +10,35 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Source
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker Image
-        run: docker build -t oyshipsarker/mern-stack-app .
+        run: docker build -t oyshipsarker/nodejs .
 
       - name: Publish Image to Docker Hub
-        run: docker push oyshipsarker/mern-stack-app:latest
+        run: docker push oyshipsarker/nodejs:latest
 
   deploy:
     needs: build
     runs-on: self-hosted
     steps:
       - name: Pull Image from Docker Hub
-        run: docker pull oyshipsarker/mern-stack-app:latest
+        run: docker pull oyshipsarker/nodejs:latest
 
       - name: List Docker Images
         run: docker images
+
+      - name: Run Docker Container
+        run: |
+          docker run -d -p 5000:5000 \
+            --name nodejs-app-container \
+            -e MONGODB_URL="${{ secrets.MONGO_URL }}" \
+            -e OPEN_AI_SECRET="${{ secrets.OPEN_AI_SECRET }}" \
+            -e JWT_SECRET="${{ secrets.JWT_SECRET }}" \
+            -e COOKIE_SECRET="${{ secrets.COOKIE_SECRET }}" \
+            -e OPENAI_ORGANIZATION_ID=${{secrets.OPENAI_ORGANIZATION_ID}} \
+            -e PORT=5000 \
+            oyshipsarker/nodejs:latest
