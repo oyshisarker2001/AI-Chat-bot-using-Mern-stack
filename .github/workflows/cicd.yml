@@ -1,29 +1,36 @@
-name: deploy nodejs application 
+name: Deploy Node.js Application
 
 on:
   push:
-    branches: [main]
-    
+    branches: 
+      - main
+
 jobs:
   build:
-    runs-on: [ubuntu-latest]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Source
         uses: actions/checkout@v3
-      - name: Login to docker hub
-        run:  docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
-      - name: Build docker image
-        run:  docker build -t oyshipsarker/mern-stack-app .
-      - name: Publish Image to docker hub
-        run: docker push oyshipsarker/mern-stack-app:latest
-    
-  deploy:
-     needs: build
-     runs-on: self-hosted
-     steps:
-      - name: Pull image from the docekr hub
-        run: docker pull oyshipsarker/mern-stack-app:latest
-      - name: Run Docker Container 
-        run:  docker run -d -p 5000:5000  --name mern-stack-app-container -e MONGODB_URL='${{secrets.MONGO_PASSWORD}}' oyshipsarker/mern-stack-app:latest
-        
 
+      - name: Login to Docker Hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build Docker Image
+        run: docker build -t oyshipsarker/mern-stack-app .
+
+      - name: Publish Image to Docker Hub
+        run: docker push oyshipsarker/mern-stack-app:latest
+
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Pull Image from Docker Hub
+        run: docker pull oyshipsarker/mern-stack-app:latest
+
+      - name: Run Docker Container
+        run: |
+          docker run -d -p 5000:5000 \
+            --name mern-stack-app-container \
+            -e MONGODB_URL=${{ secrets.MONGO_URL }} \
+            oyshipsarker/mern-stack-app:latest
