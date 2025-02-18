@@ -14,5 +14,4 @@ RUN npm install --frozen-lockfile
 COPY ./backend /usr/src/app/backend
 
 # Expose the backend port (example: 5000)
-EXPOSE 5173
-
+EXPOSE 5000
