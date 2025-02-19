@@ -1,5 +1,5 @@
 # Use a lightweight Node.js Alpine image as base
-FROM node:18-alpine
+FROM node:18 AS backend 
 
 # Set working directory in the container
 WORKDIR /app
@@ -13,7 +13,7 @@ RUN npm install --frozen-lockfile
 # Copy the rest of the application files
 COPY . .
 
-# Expose the backend port (5000 in this case)
+# Expose the backend port
 EXPOSE 5000
 
 # Command to start the application

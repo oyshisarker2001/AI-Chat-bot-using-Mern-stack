@@ -1,4 +1,4 @@
-name: Deploy Node.js Application
+name: Deploy Node.js Backend
 
 on:
   push:
@@ -12,11 +12,14 @@ jobs:
       - name: Checkout Source
         uses: actions/checkout@v4
 
+      - name: Change Directory to Backend
+        run: cd backend
+
       - name: Login to Docker Hub
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build Docker Image
-        run: docker build -t oyshipsarker/mern-stack-app .
+        run: docker build -t oyshipsarker/mern-stack-app -f Dockerfile .
 
       - name: Publish Image to Docker Hub
         run: docker push oyshipsarker/mern-stack-app:latest
@@ -26,10 +29,15 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Pull Image from Docker Hub
-        run: docker pull oyshipsarker/mern-stack_app:latest
+        run: docker pull oyshipsarker/mern-stack-app:latest
 
       - name: List Docker Images
         run: docker images
+
+      - name: Stop and Remove Existing Container (if any)
+        run: |
+          docker stop mern-stack-app-container || true
+          docker rm mern-stack-app-container || true
 
       - name: Run Docker Container
         run: |
@@ -40,7 +48,4 @@ jobs:
             -e JWT_SECRET="${{ secrets.JWT_SECRET }}" \
             -e COOKIE_SECRET="${{ secrets.COOKIE_SECRET }}" \
             -e OPENAI_ORGANIZATION_ID="${{ secrets.OPENAI_ORGANIZATION_ID }}" \
-            -e PORT="${{secrets.PORT}}"\
             oyshipsarker/mern-stack-app:latest
-
-s
