@@ -1,7 +1,8 @@
 import app from './app.js';
 import { connectToDatabase } from './db/connection.js';
 
-const PORT = process.env.PORT || 5000;
+// Convert the PORT value to a number
+const PORT: number = parseInt(process.env.PORT || '5000', 10);
 
 connectToDatabase()
   .then(() => {
