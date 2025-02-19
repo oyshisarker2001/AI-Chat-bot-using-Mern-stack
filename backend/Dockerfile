@@ -1,20 +1,20 @@
-# Use a lightweight Node.js Alpine image as base
-FROM node:18 AS backend 
+# Use an official Node.js runtime as a parent image
+FROM node:18
 
-# Set working directory in the container
+# Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy package.json and package-lock.json before running npm install
 COPY package.json package-lock.json ./
 
-# Install dependencies
-RUN npm install --frozen-lockfile
+# Reinstall dependencies inside the container
+RUN npm ci --force
 
-# Copy the rest of the application files
+# Copy the rest of your application
 COPY . .
 
-# Expose the backend port
+# Expose the port your app runs on
 EXPOSE 5000
 
-# Command to start the application
-CMD ["npm", "run", "start"]
+# Start the application
+CMD ["npm", "start"]
