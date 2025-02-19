@@ -5,7 +5,7 @@ FROM node:18
 WORKDIR /app
 
 # Copy package.json and package-lock.json before running npm install
-COPY package.json  ./
+COPY package.json package-lock.json ./
 
 # Reinstall dependencies inside the container
 RUN npm ci --force
