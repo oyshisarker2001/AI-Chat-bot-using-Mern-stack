@@ -1,4 +1,4 @@
-name: Deploy Node  Backend
+name: Deploy Nodejs  Backend
 
 on:
   push:
@@ -19,33 +19,33 @@ jobs:
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build Docker Image
-        run: docker build -t oyshipsarker/mern-stack-app -f Dockerfile .
+        run: docker build -t oyshisarker/backend-app -f Dockerfile .
 
       - name: Publish Image to Docker Hub
-        run: docker push oyshipsarker/mern-stack-app:latest
+        run: docker push oyshisarker/backend-app:latest
 
   deploy:
     needs: build
     runs-on: self-hosted
     steps:
       - name: Pull Image from Docker Hub
-        run: docker pull oyshipsarker/mern-stack-app:latest
+        run: docker pull oyshisarker/backend-app:latest
 
       - name: List Docker Images
         run: docker images
 
       - name: Stop and Remove Existing Container (if any)
         run: |
-          docker stop mern-stack-app-container || true
-          docker rm mern-stack-app-container || true
+          docker stop oyshisarker/backend-app-container || true
+          docker oyshisarker/backend-app-container || true
 
       - name: Run Docker Container
         run: |
           docker run -d -p 5000:5000 \
-            --name mern-stack-app-container \
+            --name backend-app-container \
             -e MONGODB_URL="${{ secrets.MONGO_URL }}" \
             -e OPEN_AI_SECRET="${{ secrets.OPEN_AI_SECRET }}" \
             -e JWT_SECRET="${{ secrets.JWT_SECRET }}" \
             -e COOKIE_SECRET="${{ secrets.COOKIE_SECRET }}" \
             -e OPENAI_ORGANIZATION_ID="${{ secrets.OPENAI_ORGANIZATION_ID }}" \
-            oyshipsarker/mern-stack-app:latest
+             oyshisarker/backend-app:latest
