@@ -17,10 +17,6 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(morgan("dev"));
 appRouter.use("/user", userRoutes); //domain/api/v1/user
 appRouter.use("/chat", chatRoutes); //domain/api/v1/chats
-// In your app.ts
-app.get('/', (req, res) => {
-    res.send('Welcome to the API!');
-});
 app.use("/", appRouter);
 export default app;
 //# sourceMappingURL=app.js.map
