@@ -6,7 +6,7 @@ import { deleteChats,generateChatCompletion,sendChatsToUser } from '../controlle
 const chatRoutes = Router();
 
 chatRoutes.post(
-    "/new",
+     "/new",
       validate(chatCompletionValidator),
       verifyToken,
       generateChatCompletion
