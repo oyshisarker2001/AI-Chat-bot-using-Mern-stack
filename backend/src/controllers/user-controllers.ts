@@ -2,7 +2,7 @@ import { NextFunction ,Request,Response } from "express";
 import User from "../models/User.js";
 import { hash ,compare } from 'bcrypt' ;
 import { createToken } from "../utils/token-manager.js";
-import { COOKIE_NAME } from "../utils/constants.js";
+
 
 export const getAllUsers = async(
 req: Request,
@@ -36,7 +36,7 @@ export const userSignup = async(
             const user = new User({name,email,password : hashedPassword});
             await user.save() ;
             // create token and store cookie 
-            res.clearCookie(COOKIE_NAME,{
+            res.clearCookie(process.env.COOKIE_NAME,{
                 httpOnly:true,
                 domain : "localhost",
                 signed :true ,
@@ -46,7 +46,7 @@ export const userSignup = async(
               const token = createToken(user._id.toString(),user.email,"7d") ;
               const expires = new Date ();
               expires.setDate(expires.getDate()+7);
-              res.cookie(COOKIE_NAME,token,
+              res.cookie(process.env.COOKIE_NAME,token,
             {   path:"/",
                 domain: "localhost",
                 expires,
@@ -78,7 +78,7 @@ export const userLogin = async (
             return res.status(403).send("Incorrect Password");
           }
 
-      res.clearCookie(COOKIE_NAME,{
+      res.clearCookie(process.env.COOKIE_NAME,{
         httpOnly:true,
         domain : "localhost",
         signed :true ,
@@ -88,7 +88,7 @@ export const userLogin = async (
       const token = createToken(user._id.toString(),user.email,"7d") ;
       const expires = new Date ();
       expires.setDate(expires.getDate()+7);
-      res.cookie(COOKIE_NAME,token,
+      res.cookie(process.env.COOKIE_NAME,token,
     {   path:"/",
         domain: "localhost",
         expires,
@@ -143,7 +143,7 @@ export const verifyUser = async (
           return res.status(401).send("Permissions didn't match");
         }
     
-        res.clearCookie(COOKIE_NAME, {
+        res.clearCookie(process.env.COOKIE_NAME, {
           httpOnly: true,
           domain: "localhost",
           signed: true,
@@ -158,3 +158,4 @@ export const verifyUser = async (
         return res.status(200).json({ message: "ERROR", cause: error.message });
       }
 };
+

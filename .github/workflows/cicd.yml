@@ -45,6 +45,6 @@ jobs:
             -e JWT_SECRET="${{ secrets.JWT_SECRET }}" \
             -e COOKIE_SECRET="${{ secrets.COOKIE_SECRET }}" \
             -e OPENAI_ORGANIZATION_ID="${{ secrets.OPENAI_ORGANIZATION_ID }}" \
+            -e COOKIE_NAME="${{secrets.COOKIE_NAME}}" \
             -e PORT="${{secrets.PORT}}" \
             oyshisarker/backend-app:latest
-            
