@@ -13,7 +13,10 @@ config ();
 const app = express();
 const appRouter = Router() ;
 // middleware
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(cors({
+  origin: ["http://localhost:5173", "http://34.234.64.255"],  // Allow both local and deployed frontend
+  credentials: true
+}));
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 // remove  it in production
