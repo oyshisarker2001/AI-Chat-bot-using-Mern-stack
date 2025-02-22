@@ -9,7 +9,7 @@ import axios from 'axios';
 import {Toaster } from "react-hot-toast";
 
 
-axios.defaults.baseURL="http://34.234.64.255:5000/user/auth-status";
+axios.defaults.baseURL="http://34.234.64.255:5000";
 axios.defaults.withCredentials=true;
 const theme = createTheme({
   typography:{fontFamily:"Roboto Slab, serif ",
@@ -30,3 +30,4 @@ createRoot(document.getElementById('root')!).render(
 </StrictMode>
 
 ) ;
+
