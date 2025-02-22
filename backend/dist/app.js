@@ -11,7 +11,7 @@ const app = express();
 const appRouter = Router();
 // middleware
 app.use(cors({
-    origin: ["http://localhost:5173", "http://34.234.64.255"], // Allow both local and deployed frontend
+    origin: ["http://34.234.64.255"], // Allow both local and deployed frontend
     credentials: true
 }));
 app.use(express.json());
