@@ -25,7 +25,7 @@ export const userSignup = async (req, res, next) => {
         // create token and store cookie 
         res.clearCookie(process.env.COOKIE_NAME, {
             httpOnly: true,
-            domain: "localhost",
+            domain: "34.234.64.255",
             signed: true,
             path: "/",
         });
@@ -33,7 +33,7 @@ export const userSignup = async (req, res, next) => {
         const expires = new Date();
         expires.setDate(expires.getDate() + 7);
         res.cookie(process.env.COOKIE_NAME, token, { path: "/",
-            domain: "localhost",
+            domain: "34.234.64.255",
             expires,
             httpOnly: true,
             signed: true,
@@ -59,7 +59,7 @@ export const userLogin = async (req, res, next) => {
         }
         res.clearCookie(process.env.COOKIE_NAME, {
             httpOnly: true,
-            domain: "localhost",
+            domain: "34.234.64.255",
             signed: true,
             path: "/",
         });
@@ -67,7 +67,7 @@ export const userLogin = async (req, res, next) => {
         const expires = new Date();
         expires.setDate(expires.getDate() + 7);
         res.cookie(process.env.COOKIE_NAME, token, { path: "/",
-            domain: "localhost",
+            domain: "34.234.64.255",
             expires,
             httpOnly: true,
             signed: true,
@@ -110,7 +110,7 @@ export const userLogout = async (req, res, next) => {
         }
         res.clearCookie(process.env.COOKIE_NAME, {
             httpOnly: true,
-            domain: "localhost",
+            domain: "34.234.64.255",
             signed: true,
             path: "/",
         });

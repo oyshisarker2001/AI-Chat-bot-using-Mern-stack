@@ -38,7 +38,7 @@ export const userSignup = async(
             // create token and store cookie 
             res.clearCookie(process.env.COOKIE_NAME,{
                 httpOnly:true,
-                domain : "localhost",
+                domain : "34.234.64.255",
                 signed :true ,
                 path : "/",
               });
@@ -48,7 +48,7 @@ export const userSignup = async(
               expires.setDate(expires.getDate()+7);
               res.cookie(process.env.COOKIE_NAME,token,
             {   path:"/",
-                domain: "localhost",
+                domain: "34.234.64.255",
                 expires,
                 httpOnly:true,
                 signed:true,
@@ -80,7 +80,7 @@ export const userLogin = async (
 
       res.clearCookie(process.env.COOKIE_NAME,{
         httpOnly:true,
-        domain : "localhost",
+        domain : "34.234.64.255",
         signed :true ,
         path : "/",
       });
@@ -90,7 +90,7 @@ export const userLogin = async (
       expires.setDate(expires.getDate()+7);
       res.cookie(process.env.COOKIE_NAME,token,
     {   path:"/",
-        domain: "localhost",
+        domain: "34.234.64.255",
         expires,
         httpOnly:true,
         signed:true,
@@ -102,7 +102,7 @@ export const userLogin = async (
        console.log(error);
         return res.status(200).json({message:"ERROR", cause: error.message});
         }
-     };
+};
 
 
 export const verifyUser = async (
@@ -126,9 +126,9 @@ export const verifyUser = async (
         console.log(error);
         return res.status(200).json({ message: "ERROR", cause: error.message });
       }
-    };
+};
 
-    export const userLogout = async (
+export const userLogout = async (
       req: Request,
       res: Response,
       next: NextFunction
@@ -145,7 +145,7 @@ export const verifyUser = async (
     
         res.clearCookie(process.env.COOKIE_NAME, {
           httpOnly: true,
-          domain: "localhost",
+          domain: "34.234.64.255",
           signed: true,
           path: "/",
         });
